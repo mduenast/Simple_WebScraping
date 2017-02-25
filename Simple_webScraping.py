@@ -26,9 +26,15 @@ class Simple_WebScraping(object):
             file.close()
             return html
 
+        def search(self,html):
+            soup = BeautifulSoup(html,'html.parser')
+            div = soup.find('div', {'class': 'dotd-title'})
+            return [child_tag.get_text().strip() for child_tag in div.findChildren()][0]
+
         def main(self):
             web = self.get_web()
-            
+            resultat = self.search(web)
+            return resultat
 
 if __name__ == "__main__":
     simple_webscraping = Simple_WebScraping("https://www.packtpub.com/packt/offers/free-learning")
