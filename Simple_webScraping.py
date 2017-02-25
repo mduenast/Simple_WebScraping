@@ -16,7 +16,20 @@ class Simple_WebScraping(object):
             """
             self.url = url
 
+        def get_web(self):
+            """
+            Obre una conexio per a demanar un recurs identificat amb la url, en aquest cas un html, que retorna i despres tanca la conexio.
+            :return html
+            """
+            file = urllib2.urlopen(self.url)
+            html = file.read()
+            file.close()
+            return html
 
+        def main(self):
+            web = self.get_web()
+            
 
 if __name__ == "__main__":
     simple_webscraping = Simple_WebScraping("https://www.packtpub.com/packt/offers/free-learning")
+    simple_webscraping.main()
